@@ -12,8 +12,7 @@
 
 </head>
 <body>
-<%--fffffff
-
+<%--
 <%@include file="nav_bar.jsp" %>
 <%@include file="lang_bar.jsp" %>--%>
 <h2>
