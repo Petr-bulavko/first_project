@@ -10,7 +10,7 @@ import org.example.projectWebsite.model.UserRole;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GoToAddUserCommand implements Command {
+public class GoToAddAdminCommand implements Command {
     private static final String ROLES = "roles";
 
     @Override

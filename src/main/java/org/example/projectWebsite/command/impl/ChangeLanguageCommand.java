@@ -18,11 +18,6 @@ public class ChangeLanguageCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request) throws CommandException {
-
-        //Короче тут баг, если начать вводить имя пользователя и пароль,
-        //а он будет не верный и поменять язык будет NullPointer
-        //типо user = null
-
         String controllerPage = CONTROLLER_URL;
         String referer = request.getHeader("referer");
         String page = "";

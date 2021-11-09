@@ -30,11 +30,9 @@
 
         <div class="menubar">
             <ul class="menu">
-                <li><a href="index.html">Main</a></li>
-                <li class="selected"><a href="films.html">Films</a></li>
-                <li><a href="#">Сериалы</a></li>
-                <li><a href="rating.html">Movies rating</a></li>
-                <li><a href="contact.html">Contacts</a></li>
+                <li>
+                    <%@include file="/jsp/locale.jsp" %>
+                </li>
             </ul>
         </div>
     </div>
@@ -46,9 +44,14 @@
             <div class="sidebar">
 
                 <h2>Search</h2>
-                <form method="post" action="#" id="search_form">
-                    <input type="search" name="search_field" placeholder="Your request"/>
+                <form method="post" action="${pageContext.request.contextPath}/mainController" id="filmName">
+                    <input type="hidden" name="command" value="find_film_by_name_authorized"/>
+                    <input type="search" name="filmName" placeholder="Your request"/>
                     <input type="submit" class="btn" value="Find"/>
+                    <c:if test="${sessionScope.findFilmFailed eq 'true'}">
+                        <fmt:message var="errorMessage" key="search.error.message"/>
+                        ${errorMessage}
+                    </c:if>
                 </form>
 
             </div>
@@ -87,12 +90,30 @@
 
 
         <div class="content">
-
-            <c:forEach var="film" items="${requestScope.film}">
+            <c:forEach var="film" items="${requestScope.allFilms}" varStatus="status">
                 <div class="info_film">
-                    <img src="img/inter.png">
+                    <div class="rating-area">
+                        <input type="radio" id="star-5" name="rating" value="5">
+                        <label for="star-5" title="Оценка «5»"></label>
+                        <input type="radio" id="star-4" name="rating" value="4">
+                        <label for="star-4" title="Оценка «4»"></label>
+                        <input type="radio" id="star-3" name="rating" value="3">
+                        <label for="star-3" title="Оценка «3»"></label>
+                        <input type="radio" id="star-2" name="rating" value="2">
+                        <label for="star-2" title="Оценка «2»"></label>
+                        <input type="radio" id="star-1" name="rating" value="1">
+                        <label for="star-1" title="Оценка «1»"></label>
+                    </div>
+                    <img src=${film.img}>
                         ${film.description}
-                    <div class="button"><a href="show.html">Watch</a></div>
+
+                    <form method="get" action="${pageContext.request.contextPath}/mainController">
+                    <input type="hidden" name="filmId" value="${film.filmId}">
+                    <input type="hidden" name="command" value="find_film_for_show_authorized">
+                    <input class="button" type="submit" value="Watch" style="margin-top: 0%;">
+                </form>
+
+                    </tr>
                 </div>
             </c:forEach>
         </div>

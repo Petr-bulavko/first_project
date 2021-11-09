@@ -11,9 +11,7 @@ import org.example.projectWebsite.model.User;
 import org.example.projectWebsite.model.UserData;
 import org.example.projectWebsite.model.UserRole;
 import org.example.projectWebsite.model.UserWithoutPassword;
-import org.example.projectWebsite.util.PasswordEncoder;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +49,7 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SQL_FIND_USER_WITHOUT_PASSWORD_BY_ID =
             "SELECT id, login, role FROM user_account WHERE id = ?";
-    private static final String SQL_DELETE_ADMIN_OR_DOCTOR = "DELETE FROM user_account WHERE id = ?";
+    private static final String SQL_DELETE_ADMIN = "DELETE FROM user_account WHERE id = ?";
 
     private static final String SQL_DELETE_USER_FROM_USER_DATA = "DELETE FROM user_data WHERE user_id = ?";
 
@@ -112,6 +110,7 @@ public class UserDaoImpl implements UserDao {
             }
 
             userDataStatement = connection.prepareStatement(SQL_SAVE_USER_DATA);
+            assert user != null;
             userDataStatement.setLong(1, user.getUserId());
             userDataStatement.setString(2, userData.getFirstName());
             userDataStatement.setString(3, userData.getLastName());
@@ -124,9 +123,7 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(CONNECTION_POOL_EXCEPTION_MESSAGE, e);
         } catch (SQLException e) {
             try {
-                if (connection != null) {
-                    connection.rollback();
-                }
+                connection.rollback();
             } catch (SQLException e1) {
                 throw new DaoException(TRANSACTION_EXCEPTION_MESSAGE, e1);
             }
@@ -218,7 +215,7 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement preparedStatement = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SQL_DELETE_ADMIN_OR_DOCTOR, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = connection.prepareStatement(SQL_DELETE_ADMIN, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setLong(1, entityId);
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -359,9 +356,7 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(CONNECTION_POOL_EXCEPTION_MESSAGE, e);
         } catch (SQLException e) {
             try {
-                if (connection != null) {
-                    connection.rollback();
-                }
+                connection.rollback();
             } catch (SQLException e1) {
                 throw new DaoException(TRANSACTION_EXCEPTION_MESSAGE, e1);
             }
@@ -398,9 +393,7 @@ public class UserDaoImpl implements UserDao {
             throw new DaoException(CONNECTION_POOL_EXCEPTION_MESSAGE, e);
         } catch (SQLException e) {
             try {
-                if (connection != null) {
-                    connection.rollback();
-                }
+                connection.rollback();
             } catch (SQLException e1) {
                 throw new DaoException(TRANSACTION_EXCEPTION_MESSAGE, e1);
             }

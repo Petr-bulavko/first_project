@@ -27,13 +27,9 @@
 
         <div class="menubar">
             <ul class="menu">
-                <li><a href="index.html">Main</a></li>
-                <li class="selected"><a href="films.html">Films</a></li>
                 <li>
-                    <%@include file="locale.jsp" %>
+                    <%@include file="../locale.jsp" %>
                 </li>
-                <li><a href="rating.html">Movies rating</a></li>
-                <li><a href="contact.html">Contacts</a></li>
             </ul>
         </div>
     </div>

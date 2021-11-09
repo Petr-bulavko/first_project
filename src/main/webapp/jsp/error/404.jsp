@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container-fluid text-center">
-        <a href="${pageContext.request.contextPath}/index.jsp"><img width="100%" src="/resources/img/404.jpg"></a>
+        <a href="${pageContext.request.contextPath}/index.jsp"><img width="100%" src="../../resources/img/404.jpg"></a>
     </div>
 </body>
 </html>

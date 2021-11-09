@@ -13,7 +13,7 @@ public class LogoutCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request) throws CommandException {
         request.getSession().invalidate();
-        String page = PageManager.getPageURI(PageMappingConstant.USER_MAIN_PAGE_KEY);
-        return new CommandResult(page, NavigationType.FORWARD);
+        String page = PageManager.getPageURI(PageMappingConstant.START_PAGE);
+        return new CommandResult(page, NavigationType.REDIRECT);
     }
 }

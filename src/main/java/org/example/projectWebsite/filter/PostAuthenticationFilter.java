@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebFilter(urlPatterns = {"/jsp/login.jsp", "/jsp/registration.jsp", "/index.jsp"})
+@WebFilter(urlPatterns = {"/jsp/registration.jsp", "/index.jsp"})
 public class PostAuthenticationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

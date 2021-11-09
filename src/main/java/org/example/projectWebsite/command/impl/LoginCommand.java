@@ -63,9 +63,9 @@ public class LoginCommand implements Command {
                     commandResult = new CommandResult(page, NavigationType.REDIRECT);
                 }
             } else {
-                page = PageManager.getPageURI(PageMappingConstant.USER_MAIN_PAGE_KEY);
+                page = PageManager.getPageURI(PageMappingConstant.START_PAGE);
                 request.getSession().setAttribute(IF_ERROR_MESSAGE, FLAG);
-                commandResult = new CommandResult(page, NavigationType.FORWARD);
+                commandResult = new CommandResult(page, NavigationType.REDIRECT);
             }
         } catch (ServiceException e) {
             throw new CommandException(ExceptionMessage.COMMAND_EXCEPTION_MESSAGE, e);

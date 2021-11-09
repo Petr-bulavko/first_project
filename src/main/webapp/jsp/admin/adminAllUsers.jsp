@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <!DOCTYPE html>
 <style>
     <%@include file='/resources/css/style.css' %>
@@ -31,11 +32,40 @@
 
         <div class="menubar">
             <ul class="menu">
-                <li><a href="index.html">Main</a></li>
-                <li class="selected"><a href="films.html">Films</a></li>
-                <li><a href="#">СЮДА</a></li>
-                <li><a href="rating.html">Movies rating</a></li>
-                <li><a href="contact.html">Contacts</a></li>
+                <li class="selected">
+                    <%@ include file="/jsp/locale.jsp" %>
+                </li>
+                <li class="selected">
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/mainController">
+                        <fmt:message var="logout" key="logout.button"/>
+                        <input type="hidden" name="command" value="logout">
+                        <input class="btn" type="submit" value="${logout}">
+                    </form>
+                </li>
+                <li class="selected">
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/mainController">
+                        <fmt:message var="users" key="admin.users.header"/>
+                        <input type="hidden" name="command" value="all_users">
+                        <input class="btn" type="submit" value="${users}">
+                    </form>
+                </li>
+                <li class="selected">
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/mainController">
+                        <fmt:message var="addUser" key="admin.add.admin.header"/>
+                        <input type="hidden" name="command" value="go_to_add_admin">
+                        <input class="btn" type="submit" value="${addUser}">
+                    </form>
+                </li>
+                <li class="selected">
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/mainController">
+                        <input type="hidden" name="command" value="all_films">
+                        <input class="btn" type="submit" value="All Films">
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
@@ -45,17 +75,26 @@
             <div class="sidebar">
 
                 <h2>Search</h2>
-                <form method="post" action="#" id="search_form">
-                    <input type="search" name="search_field" placeholder="Your request"/>
+                <form method="post" action="${pageContext.request.contextPath}/mainController" id="filmName">
+                    <input type="hidden" name="command" value="find_film_by_name_authorized"/>
+                    <input type="search" name="filmName" placeholder="Your request"/>
                     <input type="submit" class="btn" value="Find"/>
+                    <c:if test="${sessionScope.findFilmFailed eq 'true'}">
+                        <fmt:message var="errorMessage" key="search.error.message"/>
+                        ${errorMessage}
+                    </c:if>
                 </form>
 
             </div>
 
             <div class="sidebar">
 
+                <h2><ctg:hello role="${sessionScope.user.login}"/></h2>
+
                 <form method="post" action="${pageContext.request.contextPath}/mainController">
-                    <%@include file="/jsp/login.jsp" %>
+                    <fmt:message var="logout" key="logout.button"/>
+                    <input type="hidden" name="command" value="logout">
+                    <input class="btn" type="submit" value="${logout}">
                 </form>
 
             </div>
@@ -143,11 +182,9 @@
                         </td>
                     </table>
 
-                        <form method="post"
-                              action="${pageContext.request.contextPath}/mainController">
+                        <form method="post" action="${pageContext.request.contextPath}/mainController">
                             <input type="hidden" name="command" value="delete_user">
-                            <input type="hidden" name="userId"
-                                   value="${user.key.userId}">
+                            <input type="hidden" name="userId" value="${user.key.userId}">
                             <fmt:message var="deleteUser" key="admin.users.delete"/>
                             <input class="button" type="submit" value="${deleteUser}">
                         </form>

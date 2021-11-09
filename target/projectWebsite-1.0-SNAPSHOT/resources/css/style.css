@@ -4,7 +4,8 @@
 }
 
 body {
-	background-image: url("resources/img/body.jpg");
+	background-image: url("../../resources/img/body.png");
+	background-attachment: fixed;
 	font-size: 1.2em;
 	color: #555;
 }
@@ -127,14 +128,13 @@ hr {
 }
 
 .site_content {
-	width: 880px;
+	width: 920px;
 	overflow: hidden;
 	margin: 20px auto 0 auto;
-	background-color: white;
 }
 
 .sidebar_container {
-	opacity: 0.93;
+	opacity: 0.97;
 	float: right;
 	width: 224px;
 }
@@ -179,7 +179,7 @@ hr {
 }
 
 .content {
-	opacity: 0.87;
+	opacity: 0.93;
 	text-align: left;
 	width: 620px;
 	padding: 0 0 0 5px;
@@ -284,6 +284,7 @@ hr {
 }
 
 .info_film {
+	border-radius:  5px;
 	margin-bottom: 5%;
 	background-color: #f9f9f9;
 	padding: 5%;
@@ -305,8 +306,8 @@ hr {
 	border-radius: 5px;
 	float: right;
 	margin-top: 5%;
-	clear: both;
 	font-size: 0.8em;
+	cursor: pointer;
 }
 
 .button a {
@@ -359,4 +360,44 @@ td img {
 
 .footer p {
 	padding: 0 0 10px 0;
+}
+.rating-area {
+	overflow: hidden;
+	width: 265px;
+	margin: 0 auto;
+}
+.rating-area:not(:checked) > input {
+	display: none;
+}
+.rating-area:not(:checked) > label {
+	float: right;
+	width: 42px;
+	padding: 0;
+	cursor: pointer;
+	font-size: 32px;
+	line-height: 32px;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+.rating-area:not(:checked) > label:before {
+	content: '\2606';
+}
+.rating-area > input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+	color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px goldenrod;
+}
+.rate-area > label:active {
+	position: relative;
 }

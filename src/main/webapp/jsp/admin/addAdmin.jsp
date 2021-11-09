@@ -1,16 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Main</title>
-    <link href="/resources/css/bootstrap.css" rel="stylesheet">
-    <link href="/resources/css/admin.css" rel="stylesheet">
 </head>
 <body>
-<%--<%@include file="/jsp/admin/adminHeader.jsp" %>--%>
 <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
     <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <div class="row">
@@ -50,8 +46,8 @@
                         </select>
                     </div>
 
-                    <fmt:message key="admin.add.user.header" var="addUserButton"/>
-                    <button class="btn btn-lg btn-secondary btn-block" type="submit">
+                    <fmt:message key="admin.add.admin.header" var="addUserButton"/>
+                    <button class="btn btn-lg btn-secondary btn-block" type="submit" action="${pageContext.request.contextPath}/jsp/admin/adminHeader.jsp">
                         <span data-feather="plus-circle"></span>
                         ${addUserButton}
                         <span class="sr-only">(current)</span>
@@ -67,6 +63,16 @@
         </div>
     </div>
 </main>
+<script>
+    function loc() {
+        var lng = document.getElementById("language").value;
+        if (lng === 'ru_RU') {
+            return 'Неверный формат';
+        } else {
+            return 'Incorrect format';
+        }
+    }
+</script>
 <c:remove var="message" scope="session"/>
 </body>
 </html>

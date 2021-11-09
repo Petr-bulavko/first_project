@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <!doctype html>
 <style>
     <%@include file='/resources/css/style.css' %>
@@ -27,13 +28,9 @@
 
         <div class="menubar">
             <ul class="menu">
-                <li><a href="index.html">Main</a></li>
-                <li class="selected"><a href="films.html">Films</a></li>
                 <li>
-                    CЮДА
+                    <%@include file="/jsp/locale.jsp" %>
                 </li>
-                <li><a href="rating.html">Movies rating</a></li>
-                <li><a href="contact.html">Contacts</a></li>
             </ul>
         </div>
     </div>

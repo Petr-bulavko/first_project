@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class Film implements Entity{
-    private int id;
+    private Long filmId;
     private String filmName;
-    private int filmYear;
+    private String filmYear;
     private String filmGenre;
     private String filmCountry;
     private String description;
+    private String img;
+    private String linkMovie;
 }

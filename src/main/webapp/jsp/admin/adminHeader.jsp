@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <style>
     <%@include file='/resources/css/style.css' %>
@@ -47,9 +49,16 @@
                 <li class="selected">
                     <form method="post"
                           action="${pageContext.request.contextPath}/mainController">
-                        <fmt:message var="addUser" key="admin.add.user.header"/>
-                        <input type="hidden" name="command" value="go_to_add_user">
-                        <input class="btn" type="submit" value="${addUser}">
+                        <fmt:message var="addAdmin" key="admin.add.admin.header"/>
+                        <input type="hidden" name="command" value="go_to_add_admin">
+                        <input class="btn" type="submit" value="${addAdmin}">
+                    </form>
+                </li>
+                <li class="selected">
+                    <form method="post"
+                          action="${pageContext.request.contextPath}/mainController">
+                        <input type="hidden" name="command" value="all_films">
+                        <input class="btn" type="submit" value="All Films">
                     </form>
                 </li>
             </ul>
@@ -63,26 +72,25 @@
             <div class="sidebar">
 
                 <h2>Search</h2>
-                <form method="post" action="#" id="search_form">
-                    <input type="search" name="search_field" placeholder="Your request"/>
+                <form method="post" action="${pageContext.request.contextPath}/mainController" id="filmName">
+                    <input type="hidden" name="command" value="find_film_by_name_authorized"/>
+                    <input type="search" name="filmName" placeholder="Your request"/>
                     <input type="submit" class="btn" value="Find"/>
+                    <c:if test="${sessionScope.findFilmFailed eq 'true'}">
+                        <fmt:message var="errorMessage" key="search.error.message"/>
+                        ${errorMessage}
+                    </c:if>
                 </form>
 
             </div>
 
             <div class="sidebar">
                 <h2><ctg:hello role="${sessionScope.user.login}"/></h2>
-
-                <form method="get" action="${pageContext.request.contextPath}/jsp/user/updateData.jsp">
-                    <input class="btn" type="submit" value="Edit">
-                </form>
-
                 <form method="post" action="${pageContext.request.contextPath}/mainController">
                     <fmt:message var="logout" key="logout.button"/>
                     <input type="hidden" name="command" value="logout">
                     <input class="btn" type="submit" value="${logout}">
                 </form>
-
             </div>
             <div class="sidebar">
                 <h2>News</h2>

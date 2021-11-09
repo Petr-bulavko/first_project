@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <style>
     <%@include file='/resources/css/style.css' %>
@@ -29,11 +31,6 @@
 
         <div class="menubar">
             <ul class="menu">
-                <li><a href="index.html">Main</a></li>
-                <li class="selected"><a href="films.jsp">Films</a></li>
-                <li><a href="#">Сериалы</a></li>
-                <li><a href="rating.html">Movies rating</a></li>
-                <li><a href="contact.html">Contacts</a></li>
                 <li>
                     <%@include file="/jsp/locale.jsp" %>
                 </li>
@@ -48,9 +45,14 @@
             <div class="sidebar">
 
                 <h2>Search</h2>
-                <form method="post" action="#" id="search_form">
-                    <input type="search" name="search_field" placeholder="Your request"/>
+                <form method="post" action="${pageContext.request.contextPath}/mainController" id="filmName">
+                    <input type="hidden" name="command" value="find_film_by_name_without_registration"/>
+                    <input type="search" name="filmName" placeholder="Your request"/>
                     <input type="submit" class="btn" value="Find"/>
+                    <c:if test="${sessionScope.findFilmFailed eq 'true'}">
+                        <fmt:message var="errorMessage" key="search.error.message"/>
+                        ${errorMessage}
+                    </c:if>
                 </form>
 
             </div>
@@ -58,7 +60,7 @@
             <div class="sidebar">
 
                 <form method="post" action="${pageContext.request.contextPath}/mainController">
-                    <%@include file="/jsp/login.jsp" %>
+                    <%@include file="/WEB-INF/login.jsp" %>
                 </form>
 
             </div>
@@ -80,15 +82,19 @@
             </div>
         </div>
 
-        <img src="../../img/inter.png">
-        <img src="../../img/body.png">
         <div class="content">
-
-            <c:forEach var="film" items="${requestScope.film}">
+            <c:forEach var="film" items="${requestScope.allFilms}" varStatus="status">
                 <div class="info_film">
-                    <img src="/img/inter.jpg">
+
+                    <img src=${film.img}>
                         ${film.description}
-                    <div class="button"><a href="show.html">Watch</a></div>
+
+                    <form method="get" action="${pageContext.request.contextPath}/mainController">
+                        <input type="hidden" name="filmId" value="${film.filmId}">
+                        <input type="hidden" name="command" value="find_film_for_show_without_registration">
+                        <input class="button" type="submit" value="Watch">
+                    </form>
+                    </tr>
                 </div>
             </c:forEach>
         </div>

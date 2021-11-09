@@ -43,7 +43,7 @@
         <span><a href="#">Forgot your password?</a></span>
 
         <fmt:message var="updateButton" key="register.button"/>
-        <span><a href="${pageContext.request.contextPath}/jsp/registration.jsp">${updateButton}</a></span>
+        <span><a href="${pageContext.request.contextPath}/jsp/user/registration.jsp">${updateButton}</a></span>
     </div>
 
 </form>

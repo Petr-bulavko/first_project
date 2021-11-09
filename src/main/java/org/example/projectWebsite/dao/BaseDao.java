@@ -2,6 +2,7 @@ package org.example.projectWebsite.dao;
 
 import org.example.projectWebsite.exception.DaoException;
 import org.example.projectWebsite.model.Entity;
+import org.example.projectWebsite.model.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +61,5 @@ public interface BaseDao<T extends Entity> {
      * @throws DaoException if have {@code ConnectionPool} error or
      *                      any database error
      */
-    Entity update(T entity) throws DaoException;
-
+    Object update(T entity) throws DaoException;
 }
