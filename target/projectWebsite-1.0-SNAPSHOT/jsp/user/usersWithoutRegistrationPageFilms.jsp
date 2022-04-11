@@ -23,7 +23,7 @@
 
             <div class="logo_text">
 
-                <h1><a href="index.html">MovieMonster</a></h1>
+                <h1><a href="index.html">Оев</a></h1>
                 <h2>Cinema is our passion!</h2>
 
             </div>
